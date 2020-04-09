@@ -1,13 +1,13 @@
 package com.vinay.rest.webservices.restfulwebservices.data;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
 	private Integer id;
 	
 	@Size(min=2, message="Name should be greater than 2 characters")
@@ -36,4 +36,7 @@ public class User {
 	@Past(message="Date should be past date")
 	@Column(name="DOB")
 	private Date dateOfBirth;
+	
+	@OneToMany(mappedBy="user")
+	private List<Post> posts;
 }
